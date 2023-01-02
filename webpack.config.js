@@ -7,6 +7,7 @@ const getStyleLoader = (mode) => mode === 'production' ?
 
 module.exports = (env, argv) => ({
   entry: './src/index.tsx',
+  mode: 'production',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -23,8 +24,8 @@ module.exports = (env, argv) => ({
         exclude: /node_modules/,
         use: [
           getStyleLoader(argv.mode),
-          "css-loader",
-          "postcss-loader",
+          {loader: 'css-loader', options: {modules: true}},
+          'postcss-loader',
         ],
       }
     ],
@@ -32,17 +33,17 @@ module.exports = (env, argv) => ({
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      template: "src/index.html"
+      template: 'src/index.html'
     }),
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'public'),
+      directory: path.join(__dirname, 'dist'),
     },
     compress: true,
     port: 9000,
   },
   resolve: {
-    extensions: ['.ts', '.tsx'],
+    extensions: ['.js', '.ts', '.tsx'],
   },
 });
