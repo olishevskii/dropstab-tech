@@ -1,0 +1,18 @@
+.button {
+  @apply bg-indigo-700
+  px-4
+  pt-2
+  pb-2
+  rounded
+  text-base
+  text-white
+  transition-colors;
+}
+
+.button:hover {
+  @apply bg-indigo-800;
+}
+
+.button:active {
+  @apply bg-indigo-900;
+}
