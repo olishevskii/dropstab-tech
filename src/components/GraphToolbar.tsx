@@ -5,17 +5,37 @@ import clsx from "clsx";
 import {CustomFC} from "../types/CustomFC";
 import classes from "./GraphToolbar.css";
 import Button from "./Button";
+import Select from "./Select";
+import {useQuery} from "react-query";
+import {getCoinList} from "../api/mainApi";
+import {GettingCoinListDto} from "../api/dto/GettingCoinListDto";
 
-const GraphToolbar: CustomFC = ({className}) => (
-  <form className={clsx(className, classes.graphToolbar)}>
-    <div className={classes.buttons}>
-      <Button className={classes.button}>Day</Button>
-      <Button className={classes.button}>3 Days</Button>
-      <Button className={classes.button}>Week</Button>
-      <Button className={classes.button}>Month</Button>
-    </div>
-    <Button className={classes.button}>Refresh</Button>
-  </form>
-);
+const GraphToolbar: CustomFC = ({className}) => {
+  const {data, isLoading, isError} = useQuery('coins', getCoinList);
+
+  if (isLoading || isError) {
+    return null;
+  }
+
+  const mapToOptions = (dto: GettingCoinListDto) => {
+    return Object.values(dto.Data)
+      .map(coin => ({value: coin.symbol, description: coin.symbol}));
+  }
+
+  return (
+    <form className={clsx(className, classes.graphToolbar)}>
+      <div className={classes.container}>
+        <Button className={classes.button}>Day</Button>
+        <Button className={classes.button}>3 Days</Button>
+        <Button className={classes.button}>Week</Button>
+        <Button className={classes.button}>Month</Button>
+      </div>
+      <div className={classes.container}>
+        <Button className={classes.button}>Refresh</Button>
+        <Select options={mapToOptions(data)} />
+      </div>
+    </form>
+  );
+}
 
 export default GraphToolbar;
