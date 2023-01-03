@@ -1,12 +1,12 @@
 import React, {FC} from "react";
 
-import Button from "./components/Button";
+import classes from "./App.css";
+import GraphToolbar from "./components/GraphToolbar";
 
 const App: FC = () => {
   return (
-    <div>
-      <div>test1</div>
-      <Button>Обновить</Button>
+    <div className={classes.app}>
+      <GraphToolbar />
     </div>
   );
 }

@@ -1,0 +1,13 @@
+.graphToolbar {
+  @apply flex
+  justify-between;
+}
+
+/* TODO: Add module for sass nesting */
+.graphToolbar > .buttons > button {
+  @apply mr-2;
+}
+
+.graphToolbar > .buttons > button:last-child {
+  @apply mr-0;
+}
