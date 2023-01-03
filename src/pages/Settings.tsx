@@ -1,0 +1,40 @@
+import React, {FormEventHandler} from "react";
+
+import classes from "./Settings.css";
+import {CustomFC} from "../types/CustomFC";
+import Button from "../components/Button";
+import useTextfield from "../hooks/useTextfield";
+import {useNavigate} from "react-router-dom";
+import useRedirect from "../hooks/useRedirect";
+
+const Settings: CustomFC = () => {
+  const navigate = useNavigate();
+  const [apiKey, apiKeyHandler] = useTextfield('');
+
+  const isApiKeyExist = !!localStorage.getItem('apiKey');
+  useRedirect(isApiKeyExist, '/');
+
+  const formHandler: FormEventHandler = (e) => {
+    e.preventDefault();
+
+    const isKeyApiExist = !!apiKey;
+    if (isKeyApiExist) {
+      localStorage.setItem('apiKey', apiKey);
+      navigate('/');
+    }
+  }
+
+  return (
+    <section className={classes.page}>
+      <div className={classes.popup}>
+        <p className={classes.description}>Add api key for complete using app</p>
+        <form className={classes.form} onSubmit={formHandler}>
+          <input type="text" onChange={apiKeyHandler} value={apiKey} />
+          <Button>Save key</Button>
+        </form>
+      </div>
+    </section>
+  );
+}
+
+export default Settings;

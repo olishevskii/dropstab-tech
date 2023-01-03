@@ -6,7 +6,7 @@ import {CustomFC} from "../types/CustomFC";
 import classes from "./GraphToolbar.css";
 import Button from "./Button";
 
-const GraphToolbar: CustomFC<{}> = ({className}) => (
+const GraphToolbar: CustomFC = ({className}) => (
   <form className={clsx(className, classes.graphToolbar)}>
     <div className={classes.buttons}>
       <Button className={classes.button}>Day</Button>

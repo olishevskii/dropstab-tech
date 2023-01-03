@@ -1,0 +1,17 @@
+.page {
+  @apply h-screen
+  w-full
+  bg-gray-900
+  flex
+  flex-col
+  justify-center
+  items-center
+}
+
+.page > .popup {
+  @apply w-96
+  px-8
+  py-8
+  rounded-lg
+  bg-white;
+}
