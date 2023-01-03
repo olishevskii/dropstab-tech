@@ -42,6 +42,7 @@ module.exports = (env, argv) => ({
     },
     compress: true,
     port: 9000,
+    historyApiFallback: { index: "/", disableDotRule: true },
   },
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
