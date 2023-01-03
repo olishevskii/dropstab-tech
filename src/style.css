@@ -5,5 +5,4 @@
 body {
   width: 100%;
   margin: 0;
-  @apply bg-teal-200;
 }
