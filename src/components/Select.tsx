@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React, {SelectHTMLAttributes, useMemo} from "react";
 import clsx from "clsx";
 
 import classes from "./Select.css";
@@ -9,17 +9,17 @@ export interface Option {
   value: string;
 }
 
-export interface SelectProps {
+export interface SelectProps extends SelectHTMLAttributes<{}>{
   options: Option[];
 }
 
-const Select: CustomFC<SelectProps> = ({className, options}) => {
+const Select: CustomFC<SelectProps> = ({className, options, ...rest}) => {
   const optionElements = useMemo(() => options.map(
     option => <option key={option.description} value={option.value}>{option.description}</option>
   ), []);
 
   return (
-    <select className={clsx(className, classes.select)}>
+    <select className={clsx(className, classes.select)} {...rest}>
       {optionElements}
     </select>
   );
