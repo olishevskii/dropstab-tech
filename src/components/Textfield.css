@@ -1,0 +1,9 @@
+.textfield {
+  @apply px-3
+  py-2
+  border
+  border-black
+  border-solid
+  rounded
+  text-base;
+}
