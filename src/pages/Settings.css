@@ -9,9 +9,22 @@
 }
 
 .page > .popup {
-  @apply w-96
-  px-8
+  @apply px-8
   py-8
   rounded-lg
   bg-white;
+}
+
+.page > .popup > .description {
+  @apply mb-6
+  text-xl;
+}
+
+.page > .popup > .form {
+  @apply flex
+  flex-col;
+}
+
+.page > .popup > .form .textfield {
+  @apply mb-3;
 }

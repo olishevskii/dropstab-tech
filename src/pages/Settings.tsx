@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import useTextfield from "../hooks/useTextfield";
 import {useNavigate} from "react-router-dom";
 import useRedirect from "../hooks/useRedirect";
+import Textfield from "../components/Textfield";
 
 const Settings: CustomFC = () => {
   const navigate = useNavigate();
@@ -27,9 +28,16 @@ const Settings: CustomFC = () => {
   return (
     <section className={classes.page}>
       <div className={classes.popup}>
-        <p className={classes.description}>Add api key for complete using app</p>
+        <p className={classes.description}>Write your API key to continue using the app</p>
         <form className={classes.form} onSubmit={formHandler}>
-          <input type="text" onChange={apiKeyHandler} value={apiKey} />
+          <Textfield
+            className={classes.textfield}
+            type="password"
+            placeholder="API key"
+            onChange={apiKeyHandler}
+            value={apiKey}
+            required
+          />
           <Button>Save key</Button>
         </form>
       </div>
