@@ -1,9 +1,15 @@
-import React, {FC} from "react";
+import React from "react";
+import clsx from "clsx";
 
 import classes from "./Button.css";
+import {CustomFC} from "../types/CustomFC";
 
-const Button: FC<{children: string}> = ({children}) => (
-  <button className={classes.button}>{children}</button>
+export interface ButtonProps {
+  children: string;
+}
+
+const Button: CustomFC<ButtonProps> = ({className, children}) => (
+  <button className={clsx(className, classes.button)}>{children}</button>
 );
 
 export default Button;
