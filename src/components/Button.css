@@ -1,8 +1,7 @@
 .button {
   @apply bg-indigo-700
   px-4
-  pt-2
-  pb-2
+  py-2
   rounded
   text-base
   text-white
