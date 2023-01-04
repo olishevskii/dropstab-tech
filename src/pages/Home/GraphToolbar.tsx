@@ -7,25 +7,66 @@ import classes from "./GraphToolbar.css";
 import Button from "../../components/Button";
 import Select from "../../components/Select";
 import {CoinDto} from "../../api/dto/GettingCoinListDto";
+import {GraphMode} from "../../components/Graph";
+import RadioButton from "../../components/RadioButton";
 
 interface GraphToolbarProps {
   coins: CoinDto[];
   selectedCoin: string;
   coinHandler: ChangeEventHandler<HTMLSelectElement>;
+  graphMode: string;
+  graphModeHandler: ChangeEventHandler<HTMLInputElement>;
 }
 
-const GraphToolbar: CustomFC<GraphToolbarProps> = ({className, coins,  selectedCoin, coinHandler}) => {
+const GraphToolbar: CustomFC<GraphToolbarProps> = ({ className,
+                                                     coins,
+                                                     selectedCoin,
+                                                     coinHandler,
+                                                     graphMode,
+                                                     graphModeHandler}) => {
   const options = useMemo(() => coins.map(coin => {
     return {value: coin.symbol, description: coin.symbol};
   }), [coins]);
 
   return (
-    <form className={clsx(className, classes.graphToolbar)}>
+    <div className={clsx(className, classes.graphToolbar)}>
       <div className={classes.container}>
-        <Button className={classes.button}>Day</Button>
-        <Button className={classes.button}>3 Days</Button>
-        <Button className={classes.button}>Week</Button>
-        <Button className={classes.button}>Month</Button>
+        <RadioButton
+          className={classes.button}
+          name="graph-mode"
+          value={GraphMode.DAY}
+          onChange={graphModeHandler}
+          checked={graphMode === GraphMode.DAY}
+        >
+          Day
+        </RadioButton>
+        <RadioButton
+          className={classes.button}
+          name="graph-mode"
+          value={GraphMode.THREE_DAYS}
+          onChange={graphModeHandler}
+          checked={graphMode === GraphMode.THREE_DAYS}
+        >
+          3 Days
+        </RadioButton>
+        <RadioButton
+          className={classes.button}
+          name="graph-mode"
+          value={GraphMode.WEEK}
+          onChange={graphModeHandler}
+          checked={graphMode === GraphMode.WEEK}
+        >
+          Week
+        </RadioButton>
+        <RadioButton
+          className={classes.button}
+          name="graph-mode"
+          value={GraphMode.MONTH}
+          onChange={graphModeHandler}
+          checked={graphMode === GraphMode.MONTH}
+        >
+          Month
+        </RadioButton>
       </div>
       <div className={classes.container}>
         <Button className={classes.button}>Refresh</Button>
@@ -35,7 +76,7 @@ const GraphToolbar: CustomFC<GraphToolbarProps> = ({className, coins,  selectedC
           onChange={coinHandler}
         />
       </div>
-    </form>
+    </div>
   );
 }
 

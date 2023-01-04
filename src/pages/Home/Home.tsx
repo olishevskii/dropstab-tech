@@ -3,7 +3,7 @@ import React, {useMemo} from "react";
 import classes from "./Home.css";
 import {CustomFC} from "../../types/CustomFC";
 import GraphToolbar from "./GraphToolbar";
-import Graph from "../../components/Graph";
+import Graph, {GraphMode} from "../../components/Graph";
 import useRedirect from "../../hooks/useRedirect";
 import {useQuery} from "react-query";
 import {getCoinList, getHourlyExchange} from "../../api/mainApi";
@@ -28,6 +28,8 @@ const Home:CustomFC = () => {
     async () => getHourlyExchange({tsym: selectedCoin}),
   );
 
+  const [graphMode, graphModeHandler] = useTextfield(GraphMode.DAY);
+
   if (!exchangeQuery?.data?.Data || !coinListQuery?.data?.Data) {
     return null;
   }
@@ -37,7 +39,7 @@ const Home:CustomFC = () => {
       <main className={classes.content}>
         <GraphToolbar
           className={classes.graphToolbar}
-          {...{coins, selectedCoin, coinHandler}}
+          {...{coins, selectedCoin, coinHandler, graphMode, graphModeHandler}}
         />
         <Graph exchanges={exchangeQuery.data?.Data} />
       </main>

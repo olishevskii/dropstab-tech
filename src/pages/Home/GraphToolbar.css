@@ -4,10 +4,14 @@
 }
 
 /* TODO: Add module for sass nesting */
-.graphToolbar > .container > button {
+.graphToolbar > .container {
+  @apply flex;
+}
+
+.graphToolbar > .container > .button {
   @apply mr-2;
 }
 
-.graphToolbar > .container > button:last-child {
+.graphToolbar > .container > .button:last-child {
   @apply mr-0;
 }
