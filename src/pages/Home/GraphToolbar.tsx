@@ -2,13 +2,13 @@ import React from "react";
 import clsx from "clsx";
 
 // TODO: add absolute path for types
-import {CustomFC} from "../types/CustomFC";
+import {CustomFC} from "../../types/CustomFC";
 import classes from "./GraphToolbar.css";
-import Button from "./Button";
-import Select from "./Select";
+import Button from "../../components/Button";
+import Select from "../../components/Select";
 import {useQuery} from "react-query";
-import {getCoinList} from "../api/mainApi";
-import {GettingCoinListDto} from "../api/dto/GettingCoinListDto";
+import {getCoinList} from "../../api/mainApi";
+import {GettingCoinListDto} from "../../api/dto/GettingCoinListDto";
 
 const GraphToolbar: CustomFC = ({className}) => {
   const {data, isLoading, isError} = useQuery('coins', getCoinList);
