@@ -33,7 +33,7 @@ module.exports = (env, argv) => ({
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
+      template: 'src/assets/index.html'
     }),
   ],
   devServer: {
