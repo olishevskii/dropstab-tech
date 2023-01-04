@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEventHandler, useMemo} from "react";
 import clsx from "clsx";
 
 // TODO: add absolute path for types
@@ -6,21 +6,18 @@ import {CustomFC} from "../../types/CustomFC";
 import classes from "./GraphToolbar.css";
 import Button from "../../components/Button";
 import Select from "../../components/Select";
-import {useQuery} from "react-query";
-import {getCoinList} from "../../api/mainApi";
-import {GettingCoinListDto} from "../../api/dto/GettingCoinListDto";
+import {CoinDto} from "../../api/dto/GettingCoinListDto";
 
-const GraphToolbar: CustomFC = ({className}) => {
-  const {data, isLoading, isError} = useQuery('coins', getCoinList);
+interface GraphToolbarProps {
+  coins: CoinDto[];
+  selectedCoin: string;
+  coinHandler: ChangeEventHandler<HTMLSelectElement>;
+}
 
-  if (isLoading || isError) {
-    return null;
-  }
-
-  const mapToOptions = (dto: GettingCoinListDto) => {
-    return Object.values(dto.Data)
-      .map(coin => ({value: coin.symbol, description: coin.symbol}));
-  }
+const GraphToolbar: CustomFC<GraphToolbarProps> = ({className, coins,  selectedCoin, coinHandler}) => {
+  const options = useMemo(() => coins.map(coin => {
+    return {value: coin.symbol, description: coin.symbol};
+  }), [coins]);
 
   return (
     <form className={clsx(className, classes.graphToolbar)}>
@@ -32,7 +29,11 @@ const GraphToolbar: CustomFC = ({className}) => {
       </div>
       <div className={classes.container}>
         <Button className={classes.button}>Refresh</Button>
-        <Select options={mapToOptions(data)} />
+        <Select
+          options={options}
+          value={selectedCoin}
+          onChange={coinHandler}
+        />
       </div>
     </form>
   );

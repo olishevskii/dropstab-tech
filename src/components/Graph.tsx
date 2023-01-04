@@ -62,21 +62,21 @@ const Graph: CustomFC<LinearGraphProps> = ({exchanges, mode = GraphMode.DAY}) =>
     return result;
   }, [exchanges]);
 
-  const defaultData = {
-    labels,
-    datasets: [
-      {
-        fill: true,
-        label: 'Volume',
-        data: preparedData,
-        borderColor: 'rgb(10,154,133)',
-        backgroundColor: 'rgba(10,154,133,0.5)',
-      },
-    ],
-  };
+  const graphData = useMemo(() => {
+    return {
+      labels,
+      datasets: [
+        {
+          fill: true,
+          label: 'Volume',
+          data: preparedData,
+          borderColor: 'rgb(10,154,133)',
+          backgroundColor: 'rgba(10,154,133,0.5)',
+        },
+      ],
+    };
+  }, [labels, preparedData]);
 
-  console.log(preparedData);
-
-  return <Line options={options} data={defaultData}/>;
+  return <Line options={options} data={graphData} />;
 }
 export default Graph;
