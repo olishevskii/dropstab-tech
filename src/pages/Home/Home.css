@@ -1,0 +1,20 @@
+.page {
+  @apply h-screen
+  w-full
+  bg-gray-900
+  flex
+  flex-col
+  justify-center
+  items-center
+}
+
+.page > .content {
+  width: 800px;
+  @apply bg-white
+  p-10
+  rounded-lg;
+}
+
+.page > .content > .graphToolbar {
+  @apply mb-4;
+}
