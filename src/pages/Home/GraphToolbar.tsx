@@ -3,11 +3,9 @@ import clsx from "clsx";
 
 import {CustomFC} from "types/CustomFC";
 import classes from "./GraphToolbar.css";
-import Button from "components/Button";
-import Select from "components/Select";
-import {CoinDto} from "api/dto/GettingCoinListDto";
+import {Button, Select, RadioButton} from "components";
 import {GraphMode} from "components/Graph";
-import RadioButton from "components/RadioButton";
+import {CoinDto} from "api/dto/GettingCoinListDto";
 
 interface GraphToolbarProps {
   coins: CoinDto[];
