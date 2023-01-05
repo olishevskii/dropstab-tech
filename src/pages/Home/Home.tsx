@@ -24,11 +24,24 @@ const Home:CustomFC = () => {
     return [];
   }, [coinListQuery.data]);
 
-  const exchangeQuery = useQuery(selectedCoin,
-    async () => getHourlyExchange({tsym: selectedCoin}),
+  const getLimit = (graphMode: string) => {
+    const result = new Map<string, number>();
+
+    const nowHour = new Date().getHours();
+    result.set(GraphMode.DAY, nowHour);
+    result.set(GraphMode.THREE_DAYS, 24 * 2 + nowHour);
+    result.set(GraphMode.WEEK, 24 * 6 + nowHour);
+    result.set(GraphMode.MONTH, 24 * 29 + nowHour);
+
+    return result.get(graphMode);
+  }
+
+  const [graphMode, graphModeHandler] = useTextfield(GraphMode.THREE_DAYS);
+  const exchangeQuery = useQuery([selectedCoin, graphMode],
+    async () => getHourlyExchange({tsym: selectedCoin, limit: getLimit(graphMode)}),
   );
 
-  const [graphMode, graphModeHandler] = useTextfield(GraphMode.DAY);
+
 
   if (!exchangeQuery?.data?.Data || !coinListQuery?.data?.Data) {
     return null;
@@ -41,7 +54,7 @@ const Home:CustomFC = () => {
           className={classes.graphToolbar}
           {...{coins, selectedCoin, coinHandler, graphMode, graphModeHandler}}
         />
-        <Graph exchanges={exchangeQuery.data?.Data} />
+        <Graph exchanges={exchangeQuery.data?.Data} mode={graphMode} />
       </main>
     </div>
   )
