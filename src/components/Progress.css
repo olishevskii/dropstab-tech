@@ -9,5 +9,6 @@
 }
 
 .progress.secondary {
-  @apply border-white;
+  @apply border-white
+  border-r-transparent;
 }
