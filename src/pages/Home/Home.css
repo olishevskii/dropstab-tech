@@ -23,6 +23,12 @@
   @apply mb-4;
 }
 
-.page > .content > .progress {
+.page > .content > .progress,
+.page > .content > .resultMessage {
   @apply my-auto;
+}
+
+.page > .content > .resultMessage {
+  @apply text-xl
+  text-gray-500;
 }

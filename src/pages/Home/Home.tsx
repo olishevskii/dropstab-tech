@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React, {useCallback, useMemo} from "react";
 import {useQuery} from "react-query";
 
 import classes from "./Home.css";
@@ -24,7 +24,7 @@ const Home:CustomFC = () => {
     return [];
   }, [coinListQuery.data]);
 
-  const getLimit = (graphMode: string) => {
+  const getLimit = useCallback((graphMode: string) => {
     const result = new Map<string, number>();
 
     const nowHour = new Date().getHours();
@@ -34,12 +34,27 @@ const Home:CustomFC = () => {
     result.set(GraphMode.MONTH, 24 * 29 + nowHour);
 
     return result.get(graphMode);
-  }
+  }, []);
 
   const [graphMode, graphModeHandler] = useTextfield(GraphMode.THREE_DAYS);
   const exchangeQuery = useQuery([selectedCoin, graphMode],
     async () => getHourlyExchange({tsym: selectedCoin, limit: getLimit(graphMode)}),
   );
+
+  const getGraph = useCallback(() => {
+    const graphData = exchangeQuery.data?.Data;
+    const isLoading = exchangeQuery.isLoading || exchangeQuery.isFetching;
+    if (isLoading) {
+      return <Progress className={classes.progress} />;
+    }
+
+    const isGraphDataExist = graphData.length >= 1;
+    if (isGraphDataExist) {
+      return <Graph exchanges={graphData} mode={graphMode}/>;
+    }
+
+    return <p className={classes.resultMessage}>Data not found</p>
+  }, [exchangeQuery, graphMode]);
 
   const isCoinListExist = coinListQuery?.data?.Data;
   if (!isCoinListExist) {
@@ -48,7 +63,6 @@ const Home:CustomFC = () => {
     </div>
   }
 
-  const isGraphDataExist = exchangeQuery?.data?.Data;
   return (
     <div className={classes.page}>
       <main className={classes.content}>
@@ -56,8 +70,7 @@ const Home:CustomFC = () => {
           className={classes.graphToolbar}
           {...{coins, selectedCoin, coinHandler, graphMode, graphModeHandler}}
         />}
-        {isGraphDataExist && <Graph exchanges={exchangeQuery.data?.Data} mode={graphMode}/>}
-        {!isGraphDataExist && <Progress className={classes.progress} />}
+        {getGraph()}
       </main>
     </div>
   )
