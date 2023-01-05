@@ -2,17 +2,16 @@
   @apply w-full
   flex
   justify-between;
-}
 
-/* TODO: Add module for sass nesting */
-.graphToolbar > .container {
-  @apply flex;
-}
+  > .container {
+    @apply flex;
 
-.graphToolbar > .container > .button {
-  @apply mr-2;
-}
+    > .button {
+      @apply mr-2;
 
-.graphToolbar > .container > .button:last-child {
-  @apply mr-0;
+      &:last-child {
+        @apply mr-0;
+      }
+    }
+  }
 }

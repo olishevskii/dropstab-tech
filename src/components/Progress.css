@@ -6,9 +6,9 @@
   border-r-transparent
   rounded-full
   animate-spin;
-}
 
-.progress.secondary {
-  @apply border-white
-  border-r-transparent;
+  &.secondary {
+    @apply border-white
+    border-r-transparent;
+  }
 }

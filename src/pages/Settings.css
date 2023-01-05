@@ -5,26 +5,26 @@
   flex
   flex-col
   justify-center
-  items-center
-}
+  items-center;
 
-.page > .popup {
-  @apply px-8
-  py-8
-  rounded-lg
-  bg-white;
-}
+  > .popup {
+    @apply px-8
+    py-8
+    rounded-lg
+    bg-white;
 
-.page > .popup > .description {
-  @apply mb-6
-  text-xl;
-}
+    > .description {
+      @apply mb-6
+      text-xl;
+    }
 
-.page > .popup > .form {
-  @apply flex
-  flex-col;
-}
+    > .form {
+      @apply flex
+      flex-col;
 
-.page > .popup > .form .textfield {
-  @apply mb-3;
+      > .textfield {
+        @apply mb-3;
+      }
+    }
+  }
 }

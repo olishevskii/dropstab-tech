@@ -8,12 +8,12 @@
   transition-colors
   border
   border-indigo-700;
-}
 
-.button:hover {
-  @apply bg-indigo-800;
-}
+  &:hover {
+    @apply bg-indigo-800;
+  }
 
-.button:active {
-  @apply bg-indigo-900;
+  &:hover {
+    @apply bg-indigo-900;
+  }
 }

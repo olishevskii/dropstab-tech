@@ -4,8 +4,9 @@ import clsx from "clsx";
 import classes from "./RadioButton.css";
 import {CustomFC} from "types/CustomFC";
 
-export interface RadioButtonProps extends InputHTMLAttributes<{}>{}
+export interface RadioButtonProps extends InputHTMLAttributes<HTMLInputElement>{}
 
+//TODO: Add focus
 const RadioButton: CustomFC<RadioButtonProps> = ({className, children, ...rest}) => (
   <label className={clsx(className, classes.radioButton, rest.checked && classes.checked)}>
     <input className={classes.input} {...rest} type="radio" />

@@ -1,34 +1,37 @@
 .radioButton {
   @apply relative;
-}
 
-.radioButton > .button {
-  @apply bg-indigo-700
-  px-4
-  py-2
-  rounded
-  text-base
-  text-white
-  transition-colors
-  border
-  border-indigo-700
-  text-center
-  cursor-pointer
-  select-none;
-}
+  > .button {
+    @apply bg-indigo-700
+    px-4
+    py-2
+    rounded
+    text-base
+    text-white
+    transition-colors
+    border
+    border-indigo-700
+    text-center
+    cursor-pointer
+    select-none;
 
-.radioButton > .button:hover {
-  @apply bg-indigo-800;
-}
+    &:hover {
+      @apply bg-indigo-800;
+    }
 
-.radioButton > .button:active,
-.radioButton.checked > .button {
-  @apply bg-indigo-900;
-}
+    &:active {
+      @apply bg-indigo-900;
+    }
+  }
 
-.radioButton > .input {
-  @apply absolute
-  top-0
-  left-0
-  hidden;
+  &.checked > .button {
+    @apply bg-indigo-900;
+  }
+
+  > .input {
+    @apply absolute
+    top-0
+    left-0
+    hidden;
+  }
 }

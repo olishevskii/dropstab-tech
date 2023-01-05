@@ -5,30 +5,30 @@
   flex
   flex-col
   justify-center
-  items-center
-}
-
-.page > .content {
-  width: 800px;
-  height: 500px;
-  @apply bg-white
-  p-10
-  rounded-lg
-  flex
-  flex-col
   items-center;
-}
 
-.page > .content > .graphToolbar {
-  @apply mb-4;
-}
+  > .content {
+    width: 800px;
+    height: 500px;
+    @apply bg-white
+    p-10
+    rounded-lg
+    flex
+    flex-col
+    items-center;
 
-.page > .content > .progress,
-.page > .content > .resultMessage {
-  @apply my-auto;
-}
+    > .graphToolbar {
+      @apply mb-4;
+    }
 
-.page > .content > .resultMessage {
-  @apply text-xl
-  text-gray-500;
+    > .progress,
+    > .resultMessage {
+      @apply my-auto;
+    }
+
+    > .resultMessage {
+      @apply text-xl
+      text-gray-500;
+    }
+  }
 }
