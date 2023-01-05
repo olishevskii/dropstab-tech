@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 
 import classes from "./Settings.css";
 import {CustomFC} from "types/CustomFC";
-import {Button, Textfield} from "components";
+import {Button, Textfield, Link} from "components";
 import {useTextfield, useRedirect} from "hooks";
 
 const Settings: CustomFC = () => {
@@ -26,7 +26,9 @@ const Settings: CustomFC = () => {
   return (
     <section className={classes.page}>
       <div className={classes.popup}>
-        <p className={classes.description}>Write your API key to continue using the app</p>
+        <p className={classes.description}>
+          Write your <Link target="_blank" href="https://www.cryptocompare.com/cryptopian/api-keys">API key</Link> to continue using the app
+        </p>
         <form className={classes.form} onSubmit={formHandler}>
           <Textfield
             className={classes.textfield}
