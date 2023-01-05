@@ -10,11 +10,19 @@
 
 .page > .content {
   width: 800px;
+  height: 500px;
   @apply bg-white
   p-10
-  rounded-lg;
+  rounded-lg
+  flex
+  flex-col
+  items-center;
 }
 
 .page > .content > .graphToolbar {
   @apply mb-4;
+}
+
+.page > .content > .progress {
+  @apply my-auto;
 }

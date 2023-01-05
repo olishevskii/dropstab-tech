@@ -4,7 +4,8 @@ import {useQuery} from "react-query";
 import classes from "./Home.css";
 import {CustomFC} from "types/CustomFC";
 import GraphToolbar from "./GraphToolbar";
-import Graph, {GraphMode} from "components/Graph";
+import {Progress, Graph} from "components";
+import {GraphMode} from "components/Graph";
 import {useRedirect, useTextfield} from "hooks";
 import {getCoinList, getHourlyExchange} from "api/mainApi";
 
@@ -40,20 +41,23 @@ const Home:CustomFC = () => {
     async () => getHourlyExchange({tsym: selectedCoin, limit: getLimit(graphMode)}),
   );
 
-
-
-  if (!exchangeQuery?.data?.Data || !coinListQuery?.data?.Data) {
-    return null;
+  const isCoinListExist = coinListQuery?.data?.Data;
+  if (!isCoinListExist) {
+    return <div className={classes.page}>
+      <Progress color="secondary" />
+    </div>
   }
 
+  const isGraphDataExist = exchangeQuery?.data?.Data;
   return (
     <div className={classes.page}>
       <main className={classes.content}>
-        <GraphToolbar
+        {isCoinListExist && <GraphToolbar
           className={classes.graphToolbar}
           {...{coins, selectedCoin, coinHandler, graphMode, graphModeHandler}}
-        />
-        <Graph exchanges={exchangeQuery.data?.Data} mode={graphMode} />
+        />}
+        {isGraphDataExist && <Graph exchanges={exchangeQuery.data?.Data} mode={graphMode}/>}
+        {!isGraphDataExist && <Progress className={classes.progress} />}
       </main>
     </div>
   )

@@ -1,5 +1,6 @@
 .graphToolbar {
-  @apply flex
+  @apply w-full
+  flex
   justify-between;
 }
 
