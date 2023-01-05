@@ -7,7 +7,8 @@
   text-white
   transition-colors
   border
-  border-indigo-700;
+  border-indigo-700
+  outline-black;
 
   &:hover {
     @apply bg-indigo-800;
