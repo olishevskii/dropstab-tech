@@ -1,4 +1,4 @@
-import React, {SelectHTMLAttributes, useMemo} from "react";
+import React, {DetailedHTMLProps, useMemo} from "react";
 import clsx from "clsx";
 
 import classes from "./Select.css";
@@ -9,7 +9,9 @@ export interface Option {
   value: string;
 }
 
-export interface SelectProps extends SelectHTMLAttributes<{}>{
+export interface SelectProps extends DetailedHTMLProps<
+  React.SelectHTMLAttributes<HTMLSelectElement>,
+  HTMLSelectElement>{
   options: Option[];
 }
 
