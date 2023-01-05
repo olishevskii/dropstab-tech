@@ -1,0 +1,13 @@
+.link {
+  @apply text-indigo-500
+  transition-colors;
+}
+
+.link:hover {
+  @apply text-indigo-600;
+}
+
+.link:active {
+  @apply text-indigo-700;
+}
+
