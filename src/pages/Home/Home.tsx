@@ -36,7 +36,7 @@ const Home:CustomFC = () => {
     return result.get(graphMode);
   }, []);
 
-  const [graphMode, graphModeHandler] = useTextfield(GraphMode.THREE_DAYS);
+  const [graphMode, graphModeHandler] = useTextfield(GraphMode.DAY);
   const exchangeQuery = useQuery([selectedCoin, graphMode],
     async () => getHourlyExchange({tsym: selectedCoin, limit: getLimit(graphMode)}),
   );
