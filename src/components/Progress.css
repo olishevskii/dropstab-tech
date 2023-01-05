@@ -1,0 +1,13 @@
+.progress {
+  @apply w-10
+  h-10
+  border-4
+  border-indigo-700
+  border-r-transparent
+  rounded-full
+  animate-spin;
+}
+
+.progress.secondary {
+  @apply border-white;
+}
