@@ -1,10 +1,12 @@
-import React, {InputHTMLAttributes} from "react";
+import React, {DetailedHTMLProps} from "react";
 import clsx from "clsx";
 
 import classes from "./RadioButton.css";
 import {CustomFC} from "types/CustomFC";
 
-export interface RadioButtonProps extends InputHTMLAttributes<HTMLInputElement>{}
+export interface RadioButtonProps extends DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement>{}
 
 //TODO: Add focus
 const RadioButton: CustomFC<RadioButtonProps> = ({className, children, ...rest}) => (

@@ -32,6 +32,13 @@
     @apply absolute
     top-0
     left-0
-    hidden;
+    opacity-0;
+
+    &:focus ~ .button {
+      @apply outline-2
+      outline
+      outline-black;
+    }
   }
+
 }
