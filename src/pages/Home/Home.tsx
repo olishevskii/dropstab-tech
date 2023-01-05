@@ -1,13 +1,13 @@
 import React, {useMemo} from "react";
 
 import classes from "./Home.css";
-import {CustomFC} from "../../types/CustomFC";
+import {CustomFC} from "types/CustomFC";
 import GraphToolbar from "./GraphToolbar";
-import Graph, {GraphMode} from "../../components/Graph";
-import useRedirect from "../../hooks/useRedirect";
+import Graph, {GraphMode} from "components/Graph";
+import useRedirect from "hooks/useRedirect";
 import {useQuery} from "react-query";
-import {getCoinList, getHourlyExchange} from "../../api/mainApi";
-import useTextfield from "../../hooks/useTextfield";
+import {getCoinList, getHourlyExchange} from "api/mainApi";
+import useTextfield from "hooks/useTextfield";
 
 const Home:CustomFC = () => {
   const isApiKeyExist = !!localStorage.getItem('apiKey');

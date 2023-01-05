@@ -2,7 +2,7 @@ import React, {ButtonHTMLAttributes} from "react";
 import clsx from "clsx";
 
 import classes from "./Button.css";
-import {CustomFC} from "../types/CustomFC";
+import {CustomFC} from "types/CustomFC";
 
 export interface ButtonProps extends ButtonHTMLAttributes<{}>{}
 

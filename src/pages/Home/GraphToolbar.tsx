@@ -1,14 +1,13 @@
 import React, {ChangeEventHandler, useMemo} from "react";
 import clsx from "clsx";
 
-// TODO: add absolute path for types
-import {CustomFC} from "../../types/CustomFC";
+import {CustomFC} from "types/CustomFC";
 import classes from "./GraphToolbar.css";
-import Button from "../../components/Button";
-import Select from "../../components/Select";
-import {CoinDto} from "../../api/dto/GettingCoinListDto";
-import {GraphMode} from "../../components/Graph";
-import RadioButton from "../../components/RadioButton";
+import Button from "components/Button";
+import Select from "components/Select";
+import {CoinDto} from "api/dto/GettingCoinListDto";
+import {GraphMode} from "components/Graph";
+import RadioButton from "components/RadioButton";
 
 interface GraphToolbarProps {
   coins: CoinDto[];

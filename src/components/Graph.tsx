@@ -1,9 +1,9 @@
 import React, {useCallback, useMemo} from "react";
-import {CustomFC} from "../types/CustomFC";
+import {CustomFC} from "types/CustomFC";
 import {Line} from "react-chartjs-2";
 import {CategoryScale, Chart as ChartJS, LinearScale, LineElement, PointElement, Tooltip, Filler} from "chart.js";
-import {Exchange} from "../api/dto/GettingHourlyExchangeDto";
-import {DateUtil} from "../util/DateUtil";
+import {Exchange} from "api/dto/GettingHourlyExchangeDto";
+import {DateUtil} from "utils/DateUtil";
 
 ChartJS.register(
   CategoryScale,

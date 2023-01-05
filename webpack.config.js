@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const getStyleLoader = (mode) => mode === 'production' ?
-  MiniCssExtractPlugin.loader : "style-loader";
+  MiniCssExtractPlugin.loader : 'style-loader';
 
 module.exports = (env, argv) => ({
   entry: './src/index.tsx',
@@ -42,9 +42,18 @@ module.exports = (env, argv) => ({
     },
     compress: true,
     port: 9000,
-    historyApiFallback: { index: "/", disableDotRule: true },
+    historyApiFallback: { index: '/', disableDotRule: true },
   },
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
+    alias: {
+      api: path.resolve(__dirname, 'src/api'),
+      assets: path.resolve(__dirname, 'src/assets'),
+      components: path.resolve(__dirname, 'src/components'),
+      hooks: path.resolve(__dirname, 'src/hooks'),
+      pages: path.resolve(__dirname, 'src/pages'),
+      types: path.resolve(__dirname, 'src/types'),
+      utils: path.resolve(__dirname, 'src/utils'),
+    }
   },
 });

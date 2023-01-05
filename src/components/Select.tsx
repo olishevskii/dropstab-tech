@@ -2,7 +2,7 @@ import React, {SelectHTMLAttributes, useMemo} from "react";
 import clsx from "clsx";
 
 import classes from "./Select.css";
-import {CustomFC} from "../types/CustomFC";
+import {CustomFC} from "types/CustomFC";
 
 export interface Option {
   description: string;

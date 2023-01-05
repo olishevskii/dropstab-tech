@@ -1,12 +1,12 @@
 import React, {FormEventHandler} from "react";
 
 import classes from "./Settings.css";
-import {CustomFC} from "../types/CustomFC";
-import Button from "../components/Button";
-import useTextfield from "../hooks/useTextfield";
+import {CustomFC} from "types/CustomFC";
+import Button from "components/Button";
+import useTextfield from "hooks/useTextfield";
 import {useNavigate} from "react-router-dom";
-import useRedirect from "../hooks/useRedirect";
-import Textfield from "../components/Textfield";
+import useRedirect from "hooks/useRedirect";
+import Textfield from "components/Textfield";
 
 const Settings: CustomFC = () => {
   const navigate = useNavigate();

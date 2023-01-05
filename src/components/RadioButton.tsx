@@ -2,7 +2,7 @@ import React, {InputHTMLAttributes} from "react";
 import clsx from "clsx";
 
 import classes from "./RadioButton.css";
-import {CustomFC} from "../types/CustomFC";
+import {CustomFC} from "types/CustomFC";
 
 export interface RadioButtonProps extends InputHTMLAttributes<{}>{}
 
