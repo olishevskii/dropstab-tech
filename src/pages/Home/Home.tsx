@@ -1,20 +1,20 @@
-import React, {useCallback, useMemo} from "react";
-import {useQuery} from "react-query";
+import React, { useCallback, useMemo } from "react";
+import { useQuery } from "react-query";
 
-import classes from "./Home.css";
-import {CustomFC} from "types/CustomFC";
+import { CustomFC } from "types/CustomFC";
+import { Progress, Graph } from "components";
+import { GraphMode } from "components/Graph";
+import { useRedirect, useTextfield } from "hooks";
+import { getCoinList, getHourlyExchange } from "api/mainApi";
 import GraphToolbar from "./GraphToolbar";
-import {Progress, Graph} from "components";
-import {GraphMode} from "components/Graph";
-import {useRedirect, useTextfield} from "hooks";
-import {getCoinList, getHourlyExchange} from "api/mainApi";
+import classes from "./Home.css";
 
-const Home:CustomFC = () => {
-  const isApiKeyExist = !!localStorage.getItem('apiKey');
-  useRedirect(!isApiKeyExist, '/settings');
+const Home: CustomFC = function () {
+  const isApiKeyExist = !!localStorage.getItem("apiKey");
+  useRedirect(!isApiKeyExist, "/settings");
 
-  const [selectedCoin, coinHandler] = useTextfield('BTC');
-  const coinListQuery = useQuery('coins', getCoinList);
+  const [selectedCoin, coinHandler] = useTextfield("BTC");
+  const coinListQuery = useQuery("coins", getCoinList);
   const coins = useMemo(() => {
     const data = coinListQuery.data?.Data;
     if (coinListQuery.isSuccess && coinListQuery.data?.Data) {
@@ -37,8 +37,8 @@ const Home:CustomFC = () => {
   }, []);
 
   const [graphMode, graphModeHandler] = useTextfield(GraphMode.DAY);
-  const exchangeQuery = useQuery([selectedCoin, graphMode],
-    async () => getHourlyExchange({tsym: selectedCoin, limit: getLimit(graphMode)}),
+  const exchangeQuery = useQuery([selectedCoin, graphMode], async () =>
+    getHourlyExchange({ tsym: selectedCoin, limit: getLimit(graphMode) })
   );
 
   const getGraph = useCallback(() => {
@@ -50,30 +50,40 @@ const Home:CustomFC = () => {
 
     const isGraphDataExist = graphData.length >= 1;
     if (isGraphDataExist) {
-      return <Graph exchanges={graphData} mode={graphMode}/>;
+      return <Graph exchanges={graphData} mode={graphMode} />;
     }
 
-    return <p className={classes.resultMessage}>Data not found</p>
+    return <p className={classes.resultMessage}>Data not found</p>;
   }, [exchangeQuery, graphMode]);
 
   const isCoinListExist = coinListQuery?.data?.Data;
   if (!isCoinListExist) {
-    return <div className={classes.page}>
-      <Progress color="secondary" />
-    </div>
+    return (
+      <div className={classes.page}>
+        <Progress color="secondary" />
+      </div>
+    );
   }
 
   return (
     <div className={classes.page}>
       <main className={classes.content}>
-        {isCoinListExist && <GraphToolbar
-          className={classes.graphToolbar}
-          {...{coins, selectedCoin, coinHandler, graphMode, graphModeHandler}}
-        />}
+        {isCoinListExist && (
+          <GraphToolbar
+            className={classes.graphToolbar}
+            {...{
+              coins,
+              selectedCoin,
+              coinHandler,
+              graphMode,
+              graphModeHandler,
+            }}
+          />
+        )}
         {getGraph()}
       </main>
     </div>
-  )
-}
+  );
+};
 
 export default Home;

@@ -1,11 +1,11 @@
-import React, {ChangeEventHandler, useMemo} from "react";
+import React, { ChangeEventHandler, useMemo } from "react";
 import clsx from "clsx";
 
-import {CustomFC} from "types/CustomFC";
+import { CustomFC } from "types/CustomFC";
+import { Button, Select, RadioButton } from "components";
+import { GraphMode } from "components/Graph";
+import { CoinDto } from "api/dto/GettingCoinListDto";
 import classes from "./GraphToolbar.css";
-import {Button, Select, RadioButton} from "components";
-import {GraphMode} from "components/Graph";
-import {CoinDto} from "api/dto/GettingCoinListDto";
 
 interface GraphToolbarProps {
   coins: CoinDto[];
@@ -15,15 +15,19 @@ interface GraphToolbarProps {
   graphModeHandler: ChangeEventHandler<HTMLInputElement>;
 }
 
-const GraphToolbar: CustomFC<GraphToolbarProps> = ({ className,
-                                                     coins,
-                                                     selectedCoin,
-                                                     coinHandler,
-                                                     graphMode,
-                                                     graphModeHandler}) => {
-  const options = useMemo(() => coins.map(coin => {
-    return {value: coin.symbol, description: coin.symbol};
-  }), [coins]);
+const GraphToolbar: CustomFC<GraphToolbarProps> = function ({
+  className,
+  coins,
+  selectedCoin,
+  coinHandler,
+  graphMode,
+  graphModeHandler,
+}) {
+  const options = useMemo(
+    () =>
+      coins.map((coin) => ({ value: coin.symbol, description: coin.symbol })),
+    [coins]
+  );
 
   return (
     <div className={clsx(className, classes.graphToolbar)}>
@@ -67,14 +71,10 @@ const GraphToolbar: CustomFC<GraphToolbarProps> = ({ className,
       </div>
       <div className={classes.container}>
         <Button className={classes.button}>Refresh</Button>
-        <Select
-          options={options}
-          value={selectedCoin}
-          onChange={coinHandler}
-        />
+        <Select options={options} value={selectedCoin} onChange={coinHandler} />
       </div>
     </div>
   );
-}
+};
 
 export default GraphToolbar;

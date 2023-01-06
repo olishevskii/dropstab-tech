@@ -1,5 +1,5 @@
-import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const useRedirect = (condition: boolean, path: string) => {
   const navigate = useNavigate();
@@ -9,6 +9,6 @@ const useRedirect = (condition: boolean, path: string) => {
       navigate(path);
     }
   }, [condition]);
-}
+};
 
 export default useRedirect;

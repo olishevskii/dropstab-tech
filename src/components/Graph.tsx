@@ -1,9 +1,17 @@
-import React, {useCallback, useMemo} from "react";
-import {CustomFC} from "types/CustomFC";
-import {Line} from "react-chartjs-2";
-import {CategoryScale, Chart as ChartJS, LinearScale, LineElement, PointElement, Tooltip, Filler} from "chart.js";
-import {Exchange} from "api/dto/GettingHourlyExchangeDto";
-import {DateUtil} from "utils/DateUtil";
+import React, { useCallback, useMemo } from "react";
+import { CustomFC } from "types/CustomFC";
+import { Line } from "react-chartjs-2";
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Tooltip,
+  Filler,
+} from "chart.js";
+import { Exchange } from "api/dto/GettingHourlyExchangeDto";
+import DateUtil from "utils/DateUtil";
 
 ChartJS.register(
   CategoryScale,
@@ -11,14 +19,14 @@ ChartJS.register(
   PointElement,
   LineElement,
   Tooltip,
-  Filler,
+  Filler
 );
 
 export enum GraphMode {
-  DAY = 'day',
-  THREE_DAYS = 'three-days',
-  WEEK = 'week',
-  MONTH = 'month',
+  DAY = "day",
+  THREE_DAYS = "three-days",
+  WEEK = "week",
+  MONTH = "month",
 }
 
 export interface LinearGraphProps {
@@ -26,20 +34,26 @@ export interface LinearGraphProps {
   mode?: string;
 }
 
-const Graph: CustomFC<LinearGraphProps> = ({exchanges, mode = GraphMode.DAY}) => {
-  const options = useMemo(() => ({
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top' as const,
+const Graph: CustomFC<LinearGraphProps> = function ({
+  exchanges,
+  mode = GraphMode.DAY,
+}) {
+  const options = useMemo(
+    () => ({
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "top" as const,
+        },
       },
-    },
-  }), []);
+    }),
+    []
+  );
 
   const getDate = useCallback((daysAgo: number) => {
     const date = new Date();
     date.setHours(0, 0, 0, 0);
-    date.setDate((date.getDay() + 1) - daysAgo);
+    date.setDate(date.getDay() + 1 - daysAgo);
 
     return date;
   }, []);
@@ -68,7 +82,7 @@ const Graph: CustomFC<LinearGraphProps> = ({exchanges, mode = GraphMode.DAY}) =>
 
     exchanges.forEach((exchange) => {
       const exchangeDate = new Date(exchange.time * 1000);
-      if(DateUtil.isGreaterOrEqualDay(limitDates.get(mode), exchangeDate)) {
+      if (DateUtil.isGreaterOrEqualDay(limitDates.get(mode), exchangeDate)) {
         result.push(exchange);
       }
     });
@@ -76,29 +90,32 @@ const Graph: CustomFC<LinearGraphProps> = ({exchanges, mode = GraphMode.DAY}) =>
     return result;
   }, [exchanges, mode]);
 
-  const labels = useMemo((): string[] => {
-    return preparedExchange.map(exchange => {
-      const hour = new Date(exchange.time * 1000).getHours();
-      const prepareHour = hour > 9 ? hour.toString() : '0' + hour;
-      return `${prepareHour}:00`;
-    });
-  }, [preparedExchange]);
+  const labels = useMemo(
+    (): string[] =>
+      preparedExchange.map((exchange) => {
+        const hour = new Date(exchange.time * 1000).getHours();
+        const prepareHour = hour > 9 ? hour.toString() : `0${hour}`;
+        return `${prepareHour}:00`;
+      }),
+    [preparedExchange]
+  );
 
-  const graphData = useMemo(() => {
-    return {
+  const graphData = useMemo(
+    () => ({
       labels,
       datasets: [
         {
           fill: true,
-          label: 'Volume',
-          data: preparedExchange.map(exchange => exchange.volume),
-          borderColor: 'rgb(10,154,133)',
-          backgroundColor: 'rgba(10,154,133,0.5)',
+          label: "Volume",
+          data: preparedExchange.map((exchange) => exchange.volume),
+          borderColor: "rgb(10,154,133)",
+          backgroundColor: "rgba(10,154,133,0.5)",
         },
       ],
-    };
-  }, [labels, preparedExchange]);
+    }),
+    [labels, preparedExchange]
+  );
 
   return <Line options={options} data={graphData} />;
-}
+};
 export default Graph;

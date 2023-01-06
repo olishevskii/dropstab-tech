@@ -1,33 +1,40 @@
-import React, {FormEventHandler} from "react";
-import {useNavigate} from "react-router-dom";
+import React, { FormEventHandler } from "react";
+import { useNavigate } from "react-router-dom";
 
+import { CustomFC } from "types/CustomFC";
+import { Button, Textfield, Link } from "components";
+import { useTextfield, useRedirect } from "hooks";
 import classes from "./Settings.css";
-import {CustomFC} from "types/CustomFC";
-import {Button, Textfield, Link} from "components";
-import {useTextfield, useRedirect} from "hooks";
 
-const Settings: CustomFC = () => {
+const Settings: CustomFC = function () {
   const navigate = useNavigate();
-  const [apiKey, apiKeyHandler] = useTextfield('');
+  const [apiKey, apiKeyHandler] = useTextfield("");
 
-  const isApiKeyExist = !!localStorage.getItem('apiKey');
-  useRedirect(isApiKeyExist, '/');
+  const isApiKeyExist = !!localStorage.getItem("apiKey");
+  useRedirect(isApiKeyExist, "/");
 
   const formHandler: FormEventHandler = (e) => {
     e.preventDefault();
 
     const isKeyApiExist = !!apiKey;
     if (isKeyApiExist) {
-      localStorage.setItem('apiKey', apiKey);
-      navigate('/');
+      localStorage.setItem("apiKey", apiKey);
+      navigate("/");
     }
-  }
+  };
 
   return (
     <section className={classes.page}>
       <div className={classes.popup}>
         <p className={classes.description}>
-          Write your <Link target="_blank" href="https://www.cryptocompare.com/cryptopian/api-keys">API key</Link> to continue using the app
+          Write your{" "}
+          <Link
+            target="_blank"
+            href="https://www.cryptocompare.com/cryptopian/api-keys"
+          >
+            API key
+          </Link>{" "}
+          to continue using the app
         </p>
         <form className={classes.form} onSubmit={formHandler}>
           <Textfield
@@ -43,6 +50,6 @@ const Settings: CustomFC = () => {
       </div>
     </section>
   );
-}
+};
 
 export default Settings;

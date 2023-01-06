@@ -6,12 +6,4 @@ import RadioButton from "./RadioButton";
 import Select from "./Select";
 import Textfield from "./Textfield";
 
-export {
-  Button,
-  Graph,
-  Link,
-  Progress,
-  RadioButton,
-  Select,
-  Textfield,
-};
+export { Button, Graph, Link, Progress, RadioButton, Select, Textfield };

@@ -11,5 +11,5 @@ export interface GettingCoinListDto {
   HasWarning: boolean;
   Type: number;
   RateLimit: {};
-  Data: {[key: string]: CoinDto};
+  Data: { [key: string]: CoinDto };
 }
