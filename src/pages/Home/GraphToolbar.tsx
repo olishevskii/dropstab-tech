@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useMemo } from "react";
+import React, { ChangeEventHandler, MouseEventHandler, useMemo } from "react";
 import clsx from "clsx";
 
 import { CustomFC } from "types/CustomFC";
@@ -13,6 +13,7 @@ interface GraphToolbarProps {
   coinHandler: ChangeEventHandler<HTMLSelectElement>;
   graphMode: string;
   graphModeHandler: ChangeEventHandler<HTMLInputElement>;
+  graphUpdateHandler: MouseEventHandler<HTMLButtonElement>;
 }
 
 const GraphToolbar: CustomFC<GraphToolbarProps> = function ({
@@ -22,6 +23,7 @@ const GraphToolbar: CustomFC<GraphToolbarProps> = function ({
   coinHandler,
   graphMode,
   graphModeHandler,
+  graphUpdateHandler,
 }) {
   const options = useMemo(
     () =>
@@ -70,7 +72,9 @@ const GraphToolbar: CustomFC<GraphToolbarProps> = function ({
         </RadioButton>
       </div>
       <div className={classes.container}>
-        <Button className={classes.button}>Refresh</Button>
+        <Button className={classes.button} onClick={graphUpdateHandler}>
+          Refresh
+        </Button>
         <Select options={options} value={selectedCoin} onChange={coinHandler} />
       </div>
     </div>

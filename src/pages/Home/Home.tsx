@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { MouseEventHandler, useCallback, useMemo } from "react";
 import { useQuery } from "react-query";
 
 import { CustomFC } from "types/CustomFC";
@@ -41,6 +41,11 @@ const Home: CustomFC = function () {
     getHourlyExchange({ tsym: selectedCoin, limit: getLimit(graphMode) })
   );
 
+  const graphUpdateHandler: MouseEventHandler<HTMLButtonElement> = useCallback(
+    () => exchangeQuery.refetch(),
+    []
+  );
+
   const getGraph = useCallback(() => {
     const graphData = exchangeQuery.data?.Data;
     const isLoading = exchangeQuery.isLoading || exchangeQuery.isFetching;
@@ -77,6 +82,7 @@ const Home: CustomFC = function () {
               coinHandler,
               graphMode,
               graphModeHandler,
+              graphUpdateHandler,
             }}
           />
         )}
